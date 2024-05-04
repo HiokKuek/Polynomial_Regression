@@ -462,5 +462,5 @@ plt.show()
 #### Hooray! 
 Visually, we can see that our regression model closely matches the model derived using sckit-learn. More importantly, it seems to cut through most points on the dataset which implies that it can accurately predict your salary given your level in an organisation. 
 
-Let's test our model out and see how much more you will be making in the future on this interative [app](www.google.com). 
+Let's test our model out and see how much more you will be making in the future on this interative [app](https://polynomial-regression-webapp.vercel.app/). 
 
