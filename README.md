@@ -79,7 +79,7 @@ plt.show()
 
 
     
-![png](salary_files/salary_9_0.png)
+![png](output_9_0.png)
     
 
 
@@ -127,17 +127,12 @@ If you were to visualise how $J(w,b)$ looks like in relation to it's parameters 
 
 [Here](https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/optimizing-multivariable-functions/a/what-is-gradient-descent#:~:text=Gradient%20descent%20minimizes%20differentiable%20functions,direction%20of%20the%20negative%20gradient.) for a more detailed explanation of *Gradient Descent*. 
 
-Formula for gradient descent is as follows: 
-$$\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \phantom {0000} b := b -  \alpha \frac{\partial J(w,b)}{\partial b} \newline       \; & \phantom {0000} w := w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{1}  \; & 
-\newline & \rbrace\end{align*}$$
-
+To implement gradient descent, we repeat the following formula until convergence: 
+$$w = w -  \alpha \frac{\partial J(w,b)}{\partial w}$$
+$$b = b -  \alpha \frac{\partial J(w,b)}{\partial b}$$
 where, parameters $w, b$ are both updated simultaniously and where  
-$$
-\frac{\partial J(w,b)}{\partial b}  = \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{2}
-$$
-$$
-\frac{\partial J(w,b)}{\partial w}  = \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) -y^{(i)})x^{(i)} \tag{3}
-$$
+$$\frac{\partial J(w,b)}{\partial b}  = \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{2}$$
+$$\frac{\partial J(w,b)}{\partial w}  = \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) -y^{(i)})x^{(i)} \tag{3}$$
 * m is the number of training examples in the dataset
 
     
@@ -254,7 +249,7 @@ plt.show()
 
 
     
-![png](salary_files/salary_23_0.png)
+![png](output_23_0.png)
     
 
 
@@ -268,7 +263,7 @@ We would be adding new features to our equation.
 
 Rather than thinking that $x^2$ is the square of $x$, think of it as a new input variable that will ultimately have some effect on the salary. It can visualised with the following equation: 
 
-$$ f_{\mathbf{w},b}(\mathbf{x}) =  w_0x_0+w_1x_1+w_2x_2 + ...+ w_{15}x_{15}+ b $$ 
+$$f_{\mathbf{w},b}(\mathbf{x}) =  w_0x_0+w_1x_1+w_2x_2 + ...+ w_{15}x_{15}+ b$$ 
 where $\mathbf{w}$ and $\mathbf{x}$ are column vectors 
 
 #### Z-Score Normalisation 
@@ -290,7 +285,7 @@ x_train_poly = scaler.fit_transform(x_train_poly)
 
 #### Same same but different formulas 
 $f(\mathbf{w},b)$ can be simplified with vector dot product as:
-$$ f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b  \tag{1} $$ 
+$$f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b  \tag{1}$$ 
 Therefore, the new cost function is 
 $$J(\mathbf{w},b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})^2 \tag{2}$$ 
 
@@ -456,7 +451,7 @@ plt.show()
 
 
     
-![png](salary_files/salary_41_0.png)
+![png](output_41_0.png)
     
 
 
@@ -467,48 +462,5 @@ plt.show()
 #### Hooray! 
 Visually, we can see that our regression model closely matches the model derived using sckit-learn. More importantly, it seems to cut through most points on the dataset which implies that it can accurately predict your salary given your level in an organisation. 
 
-Let's test our model out and see how much more you will be making in the future. 
+Let's test our model out and see how much more you will be making in the future on this interative [app](www.google.com). 
 
-
-```python
-def f_wb(level): 
-    x = level
-    x = np.array([x, x**2, x**3,x**4, x**5, x**6, x**7, x**8, x**9, x**10, x**11, x**12, x**13, x**14, x**15, x**16]) #reformat to fit feature engineered model
-    predicted_income = np.dot(x, w_algo_poly) + b_algo_poly
-    
-    return predicted_income
-    
-
-def predict_income_increase(curr_level, fut_level):
-    curr_inc = f_wb(curr_level)
-    fut_inc = f_wb(fut_level)
-
-    increase = (fut_inc - curr_inc)/curr_inc #calculate income increase in percentage
-    return round(increase) #round to nearest integer
-
-curr_level = 0.0 
-fut_level = 0.0 
-
-while (curr_level < 1 or curr_level > 10):
-    try:
-        curr_level = float(input("What is your current level in your organisation from a scale of 1 to 10?"))
-    except:
-        print("Ensure that input is a float between 1 and 10")
-        
-if int(curr_level) == 10:
-    print("You can't earn any more than this...")
-else:
-    while (fut_level < curr_level or fut_level > 10):
-        try:
-            fut_level = float(input("Which level do you wish to be at?"))
-        except:
-            print("Ensure that your input is a float above your curr_level and below 10")
-    
-    income_increase = predict_income_increase(curr_level, fut_level)
-    print(f"Work hard and you will see an income increase of {income_increase}%!")
-```
-
-
-```python
-
-```
