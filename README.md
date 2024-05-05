@@ -4,7 +4,7 @@
 Have you ever wondered how much more you would be making if you were in a more senior position? Wonder no more. In this project, I have taken data from the one and only [Position Salary Dataset](https://www.kaggle.com/datasets/mariospirito/position-salariescsv) and will walk you through my implementation of polynomial regression to help you derive a model. 
 
 ### Goal
-- Predict salary given experience in months
+- Predict salary given position
 
 ### Sub-Goals
 - Understand how libraries like ```scikit-learn``` may implement regression
